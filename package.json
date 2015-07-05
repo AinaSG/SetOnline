@@ -1,0 +1,16 @@
+{
+  "name": "finalP",
+  "version": "0.0.0",
+  "description": "Final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Aina Soler",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "socket.io": "~1.3.5",
+    "socket.io-client": "~1.3.5",
+    "browserify": "~10.2.4"
+  }
+}

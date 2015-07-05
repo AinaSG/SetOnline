@@ -1,0 +1,104 @@
+<!doctype html>
+<html style="display:table; width:100%; height:100%;">
+<head>
+    <title>Projecte</title>
+</head>
+<body style= "display:table-cell; text-align:center; vertical-align:middle; height:100%;">
+<script src="pixi.js"></script>
+<script>
+    
+    //CONSTANTS
+    var sW_ = 1000;
+    var sH_ = 800;
+    var pW_ = sW_/4;
+    var pH_ = sH_/4;
+
+    //GLOBALS
+    var mySelectedCards = 0;
+
+    //GAMECONTAINER
+    var renderer = new PIXI.WebGLRenderer(sW_, sH_);
+    document.body.appendChild(renderer.view);
+    var stage = new PIXI.Container();
+
+    //ASSETS
+    //bg
+    var bg = PIXI.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
+    stage.addChild(bg);
+    //cards
+    var tableCards = [];
+    var cardbg = PIXI.Texture.fromImage("./assets/cardbg.png");
+
+    fillcards();
+
+
+
+    //ANIMATE
+    animate();
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(stage);
+    }
+
+    function fillcards() {
+        for (var i=0; i<9; ++i){
+
+            //Set card sprites properties
+            var card = new PIXI.Sprite(cardbg);
+            card.scale.set(0.4);
+            card.inf = {}; //to store info of the card
+            card.inf.id = i;
+            card.inf.shape = "circle";
+            card.inf.number = "3"
+            card.inf.texture = "full"
+            card.inf.clicked = false;
+            card.anchor.set(0.5, 0.5);
+            card.position.x = ((i%3)+1) * pW_;
+            card.position.y = (Math.floor(i/3)+1) * pH_;
+
+            //Set card interactivity
+            card.interactive = true;
+            //click
+            card.on('mousedown', onCardClick);
+            card.on('touchstart', onCardClick);
+            card.on('mouseover', onCardOver);
+            card.on('mouseout', onCardOut);
+            //Add card to the game
+            stage.addChild(card);
+            tableCards.push(card);
+        }
+    }
+
+
+
+
+// Card functions
+    function onCardClick(){
+        if (this.inf.clicked){
+            this.scale.set(0.4);
+            this.inf.clicked = false;
+            --mySelectedCards;
+        }
+        else if ( mySelectedCards<3 ) {
+            this.scale.set(0.6);
+            this.inf.clicked = true;
+            ++mySelectedCards;
+        }
+    }
+
+    function onCardOver(){
+        if(!this.inf.clicked){
+            this.scale.set(0.5);
+        }
+    }
+
+    function onCardOut(){
+        if(!this.inf.clicked) {
+            this.scale.set(0.4);
+        }
+    }
+
+</script>
+
+</body>
+</html>
