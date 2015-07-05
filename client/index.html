@@ -1,17 +1,21 @@
 <!doctype html>
-<html style="display:table; width:100%; height:100%;">
+<html style="display:table; width:100%; height:100%; background-image:url(./assets/bg.png);	background-repeat:repeat">
 <head>
     <title>Projecte</title>
 </head>
 <body style= "display:table-cell; text-align:center; vertical-align:middle; height:100%;">
 <script src="pixi.js"></script>
+<script src="Card.js"></script>
 <script>
-    
+
     //CONSTANTS
-    var sW_ = 1000;
-    var sH_ = 800;
+    var sW_ = 1100;
+    var sH_ = 900;
     var pW_ = sW_/4;
     var pH_ = sH_/4;
+    var sS_ = 0.7
+    var mS_ = 0.8
+    var bS_ = 0.9
 
     //GLOBALS
     var mySelectedCards = 0;
@@ -23,12 +27,14 @@
 
     //ASSETS
     //bg
-    var bg = PIXI.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
+    var bg = PIXI.extras.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
     stage.addChild(bg);
     //cards
     var tableCards = [];
+    var allCards = [];
     var cardbg = PIXI.Texture.fromImage("./assets/cardbg.png");
-
+    generatecards();
+    printcards();
     fillcards();
 
 
@@ -45,12 +51,9 @@
 
             //Set card sprites properties
             var card = new PIXI.Sprite(cardbg);
-            card.scale.set(0.4);
+            card.scale.set(sS_);
             card.inf = {}; //to store info of the card
             card.inf.id = i;
-            card.inf.shape = "circle";
-            card.inf.number = "3"
-            card.inf.texture = "full"
             card.inf.clicked = false;
             card.anchor.set(0.5, 0.5);
             card.position.x = ((i%3)+1) * pW_;
@@ -69,18 +72,40 @@
         }
     }
 
+    function generatecards(){
+        //Code - Shape    - Color - Number - Texture:
+        // 1   - Circle   - Red   - 1      - Empty
+        // 2   - Square   - Green - 2      - Full
+        // 3   - Triangle - Blue  - 3      - Lines
+        for (var sh = 1; sh <= 3; ++sh){
+            for (var co = 1; co <= 3; ++co){
+                for(var nu = 1; nu <= 3; ++nu){
+                    for (var te = 1; te <= 3; ++te){
+                        allCards.push(new Card(sh, co, nu, te));
+                    }
+                }
+            }
+        }
+    }
+
+    function printcards(){
+        for (var c in allCards){
+            var ca = allCards[c];
+            console.log( c + " Sh: " + ca.shape + " Nu: " + ca.num + " Co: " + ca.color + " Te: " + ca.texture);
+        }
+    }
 
 
 
 // Card functions
     function onCardClick(){
         if (this.inf.clicked){
-            this.scale.set(0.4);
+            this.scale.set(sS_);
             this.inf.clicked = false;
             --mySelectedCards;
         }
         else if ( mySelectedCards<3 ) {
-            this.scale.set(0.6);
+            this.scale.set(bS_);
             this.inf.clicked = true;
             ++mySelectedCards;
         }
@@ -88,13 +113,13 @@
 
     function onCardOver(){
         if(!this.inf.clicked){
-            this.scale.set(0.5);
+            this.scale.set(mS_);
         }
     }
 
     function onCardOut(){
         if(!this.inf.clicked) {
-            this.scale.set(0.4);
+            this.scale.set(sS_);
         }
     }
 

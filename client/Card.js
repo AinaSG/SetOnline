@@ -2,47 +2,57 @@
  * Created by aina on 05/07/15.
  */
 
-/*
-function Card(id, shape, number, fill){
-    this.shape = shape;
-    this.number = number;
-    this.fill = fill;
-    this.id = id;
-    this.clicked = false;
+function Card(Shape, Color, Number, Texture){
+    this.used = false;
+    this.onTheTable = false;
+    this.num = Number;
+    this.shapeCode = Shape;
+    this.colorCode = Color;
+    this.textureCode = Texture;
 
-    this.sprite = new PIXI.Sprite(cardbg);
-    this.sprite.scale.set(0.4);
-    this.sprite.anchor.set(0.5, 0.5);
-    this.sprite.position.x = ((i%3)+1) * pW_;
-    this.sprite.position.y = (Math.floor(i/3)+1) * pH_;
-    this.sprite.interactive = true;
-    this.sprite.on('mousedown', onCardClick);
-    this.sprite.on('touchstart', onCardClick);
-    this.sprite.on('mouseover', onCardOver);
-    this.sprite.on('mouseout', onCardOut);
+    switch (Shape){
+        case 1:
+            this.shape = "Circle";
+            break;
+        case 2:
+            this.shape = "Square";
+            break;
+        case 3:
+            this.shape = "Triangle";
+            break;
+        default:
+            console.log("ERROR IN THE SHAPE!");
+            break;
+    }
+
+    switch (Color){
+        case 1:
+            this.color = "Red";
+            break;
+        case 2:
+            this.color = "Green";
+            break;
+        case 3:
+            this.color = "Blue";
+            break;
+        default:
+            console.log("ERROR IN THE COLOR!");
+            break;
+    }
+
+    switch (Texture){
+        case 1:
+            this.texture = "Empty";
+            break;
+        case 2:
+            this.texture = "Full";
+            break;
+        case 3:
+            this.texture = "Lines";
+            break;
+        default:
+            console.log("ERROR IN THE TEXTURE!");
+            break;
+    }
+
 }
-
-function onCardClick(){
-    if (this.clicked){
-        this.scale.set(0.4);
-        this.inf.clicked = false;
-        --mySelectedCards;
-    }
-    else if ( mySelectedCards<3 ) {
-        this.scale.set(0.6);
-        this.inf.clicked = true;
-        ++mySelectedCards;
-    }
-}
-
-function onCardOver(){
-    if(!this.inf.clicked){
-        this.scale.set(0.5);
-    }
-}
-
-function onCardOut(){
-    if(!this.inf.clicked) {
-        this.scale.set(0.4);
-    }
-}*/
