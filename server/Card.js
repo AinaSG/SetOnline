@@ -56,3 +56,5 @@ function Card(Shape, Color, Number, Texture){
     }
 
 }
+
+module.exports = Card;
