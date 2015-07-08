@@ -19,17 +19,34 @@ var bS_ = 0.9;
 //GLOBALS
 var mySelectedCards = 0;
 
+//search
+//game
+//win
+var gamestate = "search";
+
 //GAMECONTAINER
 var renderer = new PIXI.WebGLRenderer(sW_, sH_);
 document.body.appendChild(renderer.view);
 var stage = new PIXI.Container();
+var searching = new PIXI.Container();
+var win = new PIXI.Container();
 
 //ASSETS
 //bg
 var bg = PIXI.extras.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
 stage.addChild(bg);
+var bg2 = PIXI.extras.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
+searching.addChild(bg2);
+var bg3 = PIXI.extras.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
+win.addChild(bg3);
 //cards
 var tableCards = [];
+
+//Texts
+var text1 = PIXI.Sprite.fromImage("./assets/searching.png");
+searching.addChild(text1);
+var text2 = PIXI.Sprite.fromImage("./assets/win.png");
+win.addChild(text2);
 
 var cardbg = PIXI.Texture.fromImage("./assets/cardbg.png");
 
@@ -41,7 +58,15 @@ fillcards();
 animate();
 function animate() {
     requestAnimationFrame(animate);
-    renderer.render(stage);
+    if (gamestate == "game") {
+        renderer.render(stage);
+    }
+    else if (gamestate == "search"){
+        renderer.render(searching);
+    }
+    else {
+        renderer.render(win);
+    }
 }
 
 function fillcards() {
@@ -83,6 +108,14 @@ socket.on('click_on_card', function (id){
         ca.inf.clicked = true;
         ++mySelectedCards;
     }
+});
+
+socket.on('op_left', function(){
+    gamestate = "win";
+});
+
+socket.on('begin', function(){
+    gamestate = "game";
 });
 
 

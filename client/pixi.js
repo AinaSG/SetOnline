@@ -3043,6 +3043,20 @@ function isEar(data, ear, minX, minY, size) {
         // first look for points inside the triangle in increasing z-order
         node = ear.nextZ;
 
+
+        // then look for points in decreasing z-order
+        node = ear.prevZ;
+
+        while (node && node.z >= minZ) {
+            i = node.i;
+            node = node.prevZ;
+            if (i === a || i === c) continue;
+
+            px = data[i];
+            py = data[i + 1];
+
+            s = cay * px + acx * py - acd;
+            if (s >= 0) {
         while (node && node.z <= maxZ) {
             i = node.i;
             node = node.nextZ;
@@ -3060,20 +3074,6 @@ function isEar(data, ear, minX, minY, size) {
                 }
             }
         }
-
-        // then look for points in decreasing z-order
-        node = ear.prevZ;
-
-        while (node && node.z >= minZ) {
-            i = node.i;
-            node = node.prevZ;
-            if (i === a || i === c) continue;
-
-            px = data[i];
-            py = data[i + 1];
-
-            s = cay * px + acx * py - acd;
-            if (s >= 0) {
                 t = aby * px + bax * py + abd;
                 if (t >= 0) {
                     k = A - s - t;
