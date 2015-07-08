@@ -46,8 +46,8 @@ function printrooms() {
 
 io.on('connection', function (socket) {
     ++onlineplayers;
-    typeof rooms[lastroom] == 'undefined'
-    if (!(onlineplayers%2==0) || ){
+
+    if (!(onlineplayers%2==0) ){
         socket.room_name = socket.id;
         socket.player_num = 1;
         rooms[socket.id] = {};
