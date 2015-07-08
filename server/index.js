@@ -53,6 +53,7 @@ io.on('connection', function (socket) {
         rooms[socket.id] = {};
         rooms[socket.id].p1 = socket.id;
         rooms[socket.id].state = false;
+        rooms[socket.id].played = false;
         lastroom = socket.id;
         socket.join(socket.room_name);
     }
@@ -61,6 +62,7 @@ io.on('connection', function (socket) {
         socket.player_num = 2;
         rooms[lastroom].p2 = socket.id;
         rooms[socket.room_name].state = true;
+        rooms[socket.room_name].played = true;
         socket.join(socket.room_name);
         io.to(socket.room_name).emit('begin');
     }
@@ -80,6 +82,7 @@ io.on('connection', function (socket) {
             rooms[r].state = false;
         }
         else {
+            if (!(rooms[r].played)) --onlineplayers;
             delete rooms[r];
         }
         console.log('disconnect', r);
