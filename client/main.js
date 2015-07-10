@@ -1,7 +1,7 @@
 /**
  * Created by aina on 06/07/15.
  */
-
+//var myname= prompt("Player Name:", "Shy Player");
 var serverURL = 'localhost:9000';
 //var serverURL = '192.168.1.41:9000'
 var socket = require('socket.io-client')(serverURL);
@@ -10,9 +10,9 @@ var socket = require('socket.io-client')(serverURL);
 //CONSTANTS
 var sW_ = 1100;
 var sH_ = 900;
-var pW_ = sW_/4;
+var pW_ = sW_/5;
 var pH_ = sH_/4;
-var sS_ = 0.7;
+var sS_ = 0.6;
 var mS_ = 0.8;
 var bS_ = 0.9;
 
@@ -23,6 +23,8 @@ var mySelectedCards = 0;
 //game
 //win
 var gamestate = "search";
+var myname= "Anon";
+var opponentName = "Anon";
 
 //GAMECONTAINER
 var renderer = new PIXI.WebGLRenderer(sW_, sH_);
@@ -64,9 +66,9 @@ var cardbg = PIXI.Texture.fromImage("./assets/cardbg.png");
 
 fillcards();
 //var infoph ={num: 3, col: "b", tex: "e", shape: "s"};
-replace(0, {num: 1, col: "r", tex: "e", shape: "c"});
-replace(1, {num: 2, col: "g", tex: "f", shape: "t"});
-replace(2, {num: 3, col: "b", tex: "l", shape: "s"});
+//replace(0, {num: 1, col: "r", tex: "e", shape: "c"});
+//replace(1, {num: 2, col: "g", tex: "f", shape: "t"});
+//replace(2, {num: 3, col: "b", tex: "l", shape: "s"});
 
 
 //ANIMATE
@@ -85,7 +87,7 @@ function animate() {
 }
 
 function fillcards() {
-    for (var i=0; i<9; ++i){
+    for (var i=0; i<12; ++i){
 
         //Set card sprites properties
         var card = new PIXI.Sprite(cardbg);
@@ -93,9 +95,14 @@ function fillcards() {
         card.inf = {}; //to store info of the card
         card.inf.id = i;
         card.inf.clicked = false;
+        card.inf.opponent = false;
+        card.inf.color = null;
+        card.inf.shape = null;
+        card.inf.num = null;
+        card.inf.texture = null;
         card.anchor.set(0.5, 0.5);
-        card.position.x = ((i%3)+1) * pW_;
-        card.position.y = (Math.floor(i/3)+1) * pH_;
+        card.position.x = ((i%4)+1) * pW_;
+        card.position.y = (Math.floor(i/4)+1) * pH_;
 
         //Set card interactivity
         card.interactive = true;
@@ -115,6 +122,10 @@ function replace ( id, info){
     card.removeChildren();
     var shape = info.shape;
     var tex = info.tex;
+    card.inf.color = info.col;
+    card.inf.shape = info.shape;
+    card.inf.num = info.num;
+    card.inf.texture = info.tex;
     var color;
     if (info.col == "r"){
         color = 0x97080E;
@@ -151,16 +162,12 @@ function replace ( id, info){
 
 socket.on('click_on_card', function (id){
     console.log("lol, recieved a click on" + id);
-    var ca = tableCards[id];
-    if (ca.inf.clicked){
-        ca.scale.set(sS_);
-        ca.inf.clicked = false;
-        --mySelectedCards;
+    //var ca = tableCards[id];
+    if (tableCards[id].inf.opponent){
+        unselectopponent(id);
     }
-    else if ( mySelectedCards<3 ) {
-        ca.scale.set(bS_);
-        ca.inf.clicked = true;
-        ++mySelectedCards;
+    else {
+        selectopponent(id);
     }
 });
 
@@ -168,27 +175,96 @@ socket.on('op_left', function(){
     gamestate = "win";
 });
 
-socket.on('begin', function(){
-    gamestate = "game";
+socket.on('begin', function(cards){
+    myname = prompt("Player Name:", "Anon");
+    socket.emit('anounceName', myname);
+    for (var i = 0; i < 12; ++i){
+        replace(i, cards[i]);
+    }
 });
 
+socket.on('set_op_name', function(name){
+    opponentName = name;
+    console.log (myname, ": recieved my oponent's name: ", name);
+    var text = new PIXI.Text((myname + " VS " + opponentName), {font:"50px Arial", fill:"white"});
+    text.anchor.set(0.5, 0.5);
+    text.position.y = 35;
+    text.position.x = sW_/2;
+    stage.addChild(text);
+    gamestate = "game";
+});
 
 
 // Card functions
 function onCardClick(){
     if (this.inf.clicked){
-        this.scale.set(sS_);
-        this.inf.clicked = false;
-        --mySelectedCards;
+        unselectmy(this.inf.id);
         socket.emit('click_on_card', this.inf.id);
         console.log("lol, sending a click on" + this.inf.id);
     }
     else if ( mySelectedCards<3 ) {
-        this.scale.set(bS_);
-        this.inf.clicked = true;
-        ++mySelectedCards;
+        selectmy(this.inf.id);
         socket.emit('click_on_card', this.inf.id);
         console.log("lol, sending a click on" + this.inf.id);
+    }
+    if(mySelectedCards == 3){
+        tripsCheckEm();
+    }
+}
+
+function unselectmy(i){
+    tableCards[i].scale.set(sS_);
+    tableCards[i].inf.clicked = false;
+    --mySelectedCards;
+}
+
+function selectmy(i){
+    tableCards[i].scale.set(bS_);
+    tableCards[i].inf.clicked = true;
+    ++mySelectedCards;
+}
+
+function unselectopponent(i){
+    tableCards[i].tint = 0xFFFFFF;
+    tableCards[i].inf.opponent = false;
+}
+
+function selectopponent(i){
+    tableCards[i].tint = 0xDEDEDE;
+    tableCards[i].inf.opponent = true;
+}
+
+function uncheckAll(){
+    for (var i = 0; i < 12; ++i){
+        if (tableCards[i].inf.clicked){
+            unselectmy(i);
+            socket.emit('click_on_card', i);
+        }
+    }
+}
+
+function getPoints(){
+    console.log("Points!");
+}
+
+function tripsCheckEm() {
+    var sel = [];
+    for ( var i = 0; i < 12; ++i ){
+        //console.log(i, tableCards[i]);
+        if (tableCards[i].inf.clicked) sel.push(tableCards[i].inf);
+    }
+    var c = (sel[0].color == sel[1].color && sel[0].color == sel[2].color) || (sel[0].color != sel[1].color && sel[0].color != sel[2].color && sel[1].color != sel[2].color);
+    var s = (sel[0].shape == sel[1].shape && sel[0].shape == sel[2].shape) || (sel[0].shape != sel[1].shape && sel[0].shape != sel[2].shape && sel[1].shape != sel[2].shape);
+    var t = (sel[0].texture == sel[1].texture && sel[0].texture == sel[2].texture) || (sel[0].texture != sel[1].texture && sel[0].texture != sel[2].texture && sel[1].texture != sel[2].texture);
+    var n = (sel[0].num == sel[1].num && sel[0].num == sel[2].num) || (sel[0].num != sel[1].num && sel[0].num != sel[2].num && sel[1].num != sel[2].num);
+
+    if (c && s && t && n) {
+        console.log ("checked");
+        getPoints();
+    }
+    else {
+        uncheckAll();
+        console.log("so close");
     }
 }
 

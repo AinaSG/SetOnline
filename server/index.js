@@ -8,36 +8,10 @@ var Card = require('./Card.js');
 var Room = require('./Room.js');
 var onlineplayers = 0;
 var rooms = {};
-var allCards = [];
 
 var lastroom = null;
-generatecards();
-printcards();
-
-function generatecards(){
-    //Code - Shape    - Color - Number - Texture:
-    // 1   - Circle   - Red   - 1      - Empty
-    // 2   - Square   - Green - 2      - Full
-    // 3   - Triangle - Blue  - 3      - Lines
-
-    for (var sh = 1; sh <= 3; ++sh){
-        for (var co = 1; co <= 3; ++co){
-            for(var nu = 1; nu <= 3; ++nu){
-                for (var te = 1; te <= 3; ++te){
-                    allCards.push(new Card(sh, co, nu, te));
-                }
-            }
-        }
-    }
-}
 
 
-function printcards(){
-    for (var c in allCards){
-        var ca = allCards[c];
-        console.log( c + " Sh: " + ca.shape + " Nu: " + ca.num + " Co: " + ca.color + " Te: " + ca.texture);
-    }
-}
 
 function printrooms() {
     console.log('onlinePlayers', onlineplayers);
@@ -55,9 +29,6 @@ io.on('connection', function (socket) {
         socket.room_name = socket.id;
         socket.player_num = 1;
         rooms[socket.id] = new Room(socket.room_name);
-        //rooms[socket.id].p1 = socket.id;
-        //rooms[socket.id].state = false;
-        //rooms[socket.id].played = false;
         lastroom = socket.id;
         socket.join(rooms[socket.id].name);
     }
@@ -67,9 +38,8 @@ io.on('connection', function (socket) {
         rooms[lastroom].p2 = socket.id;
         rooms[socket.room_name].state = true;
         rooms[socket.room_name].played = true;
-        //rooms[socket.room_name].deck = generatedeck();
         socket.join(socket.room_name);
-        io.to(socket.room_name).emit('begin');
+        io.to(socket.room_name).emit('begin',rooms[socket.room_name].begincards());
     }
     socket.on('click_on_card', function (id) {
         var r = socket.room_name;
@@ -93,17 +63,35 @@ io.on('connection', function (socket) {
         console.log('disconnect', r);
         printrooms();
     });
+    socket.on('anounceName', function(n) {
+        console.log("Anounced name: ", n);
+        var r = socket.room_name;
+        if (socket.id == r){
+            rooms[r].p1_name = n;
+            console.log (n , " is player1");
+        }
+        else{
+            rooms[r].p2_name = n;
+            console.log (n , " is player2");
+        }
+        if(rooms[r].anounced_names == 0){
+            ++rooms[r].anounced_names;
+            console.log('waiting for the other');
+        }
+        else{
+            if (socket.id == r){
+                socket.broadcast.to(r).emit('set_op_name', rooms[r].p1_name);
+                socket.emit('set_op_name',  rooms[r].p2_name);
+
+
+            }
+            else{
+                socket.broadcast.to(r).emit('set_op_name', rooms[r].p2_name);
+                socket.emit('set_op_name',  rooms[r].p1_name);
+            }
+        }
+    });
     printrooms();
 });
 
 console.log('server started on port', port);
-
-
-
-/*
- socket.on('disconnect', function () {
- console.log('disconnection', socket.id)
- delete players[socket.id]
- socket.broadcast.emit('remove_player', socket.id)
- })
- */

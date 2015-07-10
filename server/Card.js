@@ -2,9 +2,10 @@
  * Created by aina on 05/07/15.
  */
 
-function Card(Shape, Color, Number, Texture){
-    this.used = false;
-    this.onTheTable = false;
+function Card(id, Shape, Color, Number, Texture){
+    //this.used = false;
+    //this.onTheTable = false;
+    this.id = id;
     this.num = Number;
     this.shapeCode = Shape;
     this.colorCode = Color;
