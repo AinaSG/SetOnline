@@ -42,6 +42,18 @@ win.addChild(bg3);
 //cards
 var tableCards = [];
 
+//Card content
+var shapetextures = [];
+shapetextures["ce"] = PIXI.Texture.fromImage("./assets/ce.png");
+shapetextures["cf"] = PIXI.Texture.fromImage("./assets/cf.png");
+shapetextures["cl"] = PIXI.Texture.fromImage("./assets/cl.png");
+shapetextures["te"] = PIXI.Texture.fromImage("./assets/te.png");
+shapetextures["tf"] = PIXI.Texture.fromImage("./assets/tf.png");
+shapetextures["tl"] = PIXI.Texture.fromImage("./assets/tl.png");
+shapetextures["se"] = PIXI.Texture.fromImage("./assets/se.png");
+shapetextures["sf"] = PIXI.Texture.fromImage("./assets/sf.png");
+shapetextures["sl"] = PIXI.Texture.fromImage("./assets/sl.png");
+
 //Texts
 var text1 = PIXI.Sprite.fromImage("./assets/searching.png");
 searching.addChild(text1);
@@ -51,7 +63,10 @@ win.addChild(text2);
 var cardbg = PIXI.Texture.fromImage("./assets/cardbg.png");
 
 fillcards();
-
+//var infoph ={num: 3, col: "b", tex: "e", shape: "s"};
+replace(0, {num: 1, col: "r", tex: "e", shape: "c"});
+replace(1, {num: 2, col: "g", tex: "f", shape: "t"});
+replace(2, {num: 3, col: "b", tex: "l", shape: "s"});
 
 
 //ANIMATE
@@ -93,6 +108,45 @@ function fillcards() {
         stage.addChild(card);
         tableCards.push(card);
     }
+}
+
+function replace ( id, info){
+    var card = tableCards[id];
+    card.removeChildren();
+    var shape = info.shape;
+    var tex = info.tex;
+    var color;
+    if (info.col == "r"){
+        color = 0x97080E;
+    }
+    else if (info.col == "g"){
+        color = 0x488C13;
+    }
+    else {
+        color = 0x1B55C0;
+    }
+
+    var simbols = [];
+    for (var i = 0; i < info.num; ++i){
+        var str = shape+tex;
+        simbols[i] = new PIXI.Sprite(shapetextures[str]);
+        simbols[i].tint = color;
+        simbols[i].anchor.set(0.5, 0.5);
+        card.addChild(simbols[i]);
+    }
+    if (info.num == 1){
+      //NOOP
+    }
+    else if (info.num == 2){
+        simbols[0].position.y += 55;
+        simbols[1].position.y -= 55;
+
+    }
+    else {
+        simbols[1].position.y += 75;
+        simbols[2].position.y -= 75;
+    }
+
 }
 
 socket.on('click_on_card', function (id){

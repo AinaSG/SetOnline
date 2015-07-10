@@ -12,13 +12,13 @@ function Card(Shape, Color, Number, Texture){
 
     switch (Shape){
         case 1:
-            this.shape = "Circle";
+            this.shape = "c";//"Circle";
             break;
         case 2:
-            this.shape = "Square";
+            this.shape = "s";//"Square";
             break;
         case 3:
-            this.shape = "Triangle";
+            this.shape = "t";//"Triangle";
             break;
         default:
             console.log("ERROR IN THE SHAPE!");
@@ -27,13 +27,13 @@ function Card(Shape, Color, Number, Texture){
 
     switch (Color){
         case 1:
-            this.color = "Red";
+            this.color = "r";//"Red";
             break;
         case 2:
-            this.color = "Green";
+            this.color = "g";//"Green";
             break;
         case 3:
-            this.color = "Blue";
+            this.color = "b";//"Blue";
             break;
         default:
             console.log("ERROR IN THE COLOR!");
@@ -42,13 +42,13 @@ function Card(Shape, Color, Number, Texture){
 
     switch (Texture){
         case 1:
-            this.texture = "Empty";
+            this.texture = "e";//"Empty";
             break;
         case 2:
-            this.texture = "Full";
+            this.texture = "f";//"Full";
             break;
         case 3:
-            this.texture = "Lines";
+            this.texture = "l";//"Lines";
             break;
         default:
             console.log("ERROR IN THE TEXTURE!");
