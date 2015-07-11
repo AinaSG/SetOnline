@@ -54,7 +54,7 @@ Room.prototype.newcards = function(toreplace){
         nc.push(ci);
     }
     for (var i = 12-cartesbuides; i< 12; ++i){
-        var ci = {isCard: false, id: toreplace[i-9], num: null, col: null, tex: null, shape: null};
+        var ci = {isCard: false, id: toreplace[i-(12-cartesbuides)], num: null, col: null, tex: null, shape: null};
         nc.push(ci);
 
     }

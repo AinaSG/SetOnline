@@ -40,8 +40,8 @@
       <file leaf-file-name="Room.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/Room.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.1770387">
-              <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.62982833">
+              <caret line="56" column="65" selection-start-line="56" selection-start-column="65" selection-end-line="56" selection-end-column="65" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
               </folding>
@@ -53,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/client/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="223" column="5" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
+              <caret line="222" column="39" selection-start-line="222" selection-start-column="39" selection-end-line="222" selection-end-column="39" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
                 <element signature="n#!!block;n#fillcards#0" expanded="false" />
@@ -255,8 +255,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="22" width="1922" height="1059" extended-state="7" />
-    <editor active="true" />
+    <frame x="-1" y="22" width="1922" height="1059" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -783,23 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="223" column="5" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-            <element signature="n#!!block;n#fillcards#0" expanded="false" />
-            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
-            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
-            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
-            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
-            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
-            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/Card.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -819,10 +802,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="222" column="39" selection-start-line="222" selection-start-column="39" selection-end-line="222" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/Room.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1770387">
-          <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.62982833">
+          <caret line="56" column="65" selection-start-line="56" selection-start-column="65" selection-end-line="56" selection-end-column="65" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
           </folding>

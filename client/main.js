@@ -220,7 +220,7 @@ function replace ( id, info){
         }
     }
     else {
-        stage.removeChild(card);
+        tableCards[id].visible = false;
     }
 }
 
