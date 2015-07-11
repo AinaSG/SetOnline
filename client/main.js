@@ -15,6 +15,9 @@ var pH_ = sH_/4;
 var sS_ = 0.6;
 var mS_ = 0.8;
 var bS_ = 0.9;
+var sT_ = 1;
+var mT_ = 1.2;
+var bT_ = 1.4;
 
 //GLOBALS
 var mySelectedCards = 0;
@@ -25,6 +28,7 @@ var mySelectedCards = 0;
 var gamestate = "search";
 var myname= "Anon";
 var opponentName = "Anon";
+var opprequesting = false;
 
 //GAMECONTAINER
 var renderer = new PIXI.WebGLRenderer(sW_, sH_);
@@ -32,6 +36,7 @@ document.body.appendChild(renderer.view);
 var stage = new PIXI.Container();
 var searching = new PIXI.Container();
 var win = new PIXI.Container();
+var result = new PIXI.Container();
 
 //ASSETS
 //bg
@@ -41,6 +46,58 @@ var bg2 = PIXI.extras.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
 searching.addChild(bg2);
 var bg3 = PIXI.extras.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
 win.addChild(bg3);
+var bg4 = PIXI.extras.TilingSprite.fromImage("./assets/bg.png", sW_, sH_);
+result.addChild(bg4);
+var c1 = PIXI.Sprite.fromImage("./assets/lostlost.png");
+var c2 = PIXI.Sprite.fromImage("./assets/winwin.png");
+var c3 = PIXI.Sprite.fromImage("./assets/tietie.png");
+//trash
+var t = PIXI.Sprite.fromImage("./assets/trash.png");
+var re = PIXI.Sprite.fromImage("./assets/request.png");
+t.anchor.set(0.5, 0.5);
+t.inf = {};
+t.inf.clicked = false;
+t.interactive = true;
+t.on('mouseover', onTrashOver);
+t.on('mouseout', onTrashOut);
+t.on('mousedown', onTrashClick);
+t.on('touchstart', onTrashClick);
+t.position.y = 855;
+t.position.x = 1050;
+re.anchor.set(0.5, 0.5);
+re.position.y = 855;
+re.position.x = 1050;
+re.visible = opprequesting;
+console.log("players :D");
+var b = PIXI.Sprite.fromImage("./assets/bear.png");
+b.anchor.set(0.5, 0.5);
+b.scale.set(0.7);
+b.position.y = 35;
+b.position.x = 120;
+var f = PIXI.Sprite.fromImage("./assets/frog.png");
+f.anchor.set(0.5, 0.5);
+f.scale.set (0.7);
+f.position.y =35;
+f.position.x =980;
+stage.addChild(re);
+stage.addChild(t);
+stage.addChild(b);
+stage.addChild(f);
+
+var mypoints = 0;
+var oppoints = 0;
+var mp = new PIXI.Text(mypoints, {font:"50px Arial", fill:"white"});
+var op = new PIXI.Text(oppoints, {font:"50px Arial", fill:"white"});
+mp.anchor.set(0.5, 0.5);
+op.anchor.set(0.5, 0.5);
+mp.position.y = 35;
+mp.position.x = 50;
+op.position.y = 35;
+op.position.x = 1050;
+stage.addChild(mp);
+stage.addChild(op);
+
+
 //cards
 var tableCards = [];
 
@@ -81,6 +138,9 @@ function animate() {
     else if (gamestate == "search"){
         renderer.render(searching);
     }
+    else if (gamestate == "results"){
+        renderer.render(result);
+    }
     else {
         renderer.render(win);
     }
@@ -120,44 +180,48 @@ function fillcards() {
 function replace ( id, info){
     var card = tableCards[id];
     card.removeChildren();
-    var shape = info.shape;
-    var tex = info.tex;
-    card.inf.color = info.col;
-    card.inf.shape = info.shape;
-    card.inf.num = info.num;
-    card.inf.texture = info.tex;
-    var color;
-    if (info.col == "r"){
-        color = 0x97080E;
-    }
-    else if (info.col == "g"){
-        color = 0x488C13;
+    if(info.isCard) {
+        var shape = info.shape;
+        var tex = info.tex;
+        card.inf.color = info.col;
+        card.inf.shape = info.shape;
+        card.inf.num = info.num;
+        card.inf.texture = info.tex;
+        var color;
+        if (info.col == "r") {
+            color = 0x97080E;
+        }
+        else if (info.col == "g") {
+            color = 0x488C13;
+        }
+        else {
+            color = 0x1B55C0;
+        }
+
+        var simbols = [];
+        for (var i = 0; i < info.num; ++i) {
+            var str = shape + tex;
+            simbols[i] = new PIXI.Sprite(shapetextures[str]);
+            simbols[i].tint = color;
+            simbols[i].anchor.set(0.5, 0.5);
+            card.addChild(simbols[i]);
+        }
+        if (info.num == 1) {
+            //NOOP
+        }
+        else if (info.num == 2) {
+            simbols[0].position.y += 55;
+            simbols[1].position.y -= 55;
+
+        }
+        else {
+            simbols[1].position.y += 75;
+            simbols[2].position.y -= 75;
+        }
     }
     else {
-        color = 0x1B55C0;
+        stage.removeChild(card);
     }
-
-    var simbols = [];
-    for (var i = 0; i < info.num; ++i){
-        var str = shape+tex;
-        simbols[i] = new PIXI.Sprite(shapetextures[str]);
-        simbols[i].tint = color;
-        simbols[i].anchor.set(0.5, 0.5);
-        card.addChild(simbols[i]);
-    }
-    if (info.num == 1){
-      //NOOP
-    }
-    else if (info.num == 2){
-        simbols[0].position.y += 55;
-        simbols[1].position.y -= 55;
-
-    }
-    else {
-        simbols[1].position.y += 75;
-        simbols[2].position.y -= 75;
-    }
-
 }
 
 socket.on('click_on_card', function (id){
@@ -183,6 +247,16 @@ socket.on('begin', function(cards){
     }
 });
 
+socket.on('trash_cards', function(cards){
+    unselectTrash();
+    uncheckAll();
+    opprequesting = false;
+    re.visible = opprequesting;
+    for (var i = 0; i < 12; ++i){
+        replace(i, cards[i]);
+    }
+});
+
 socket.on('set_op_name', function(name){
     opponentName = name;
     console.log (myname, ": recieved my oponent's name: ", name);
@@ -194,6 +268,34 @@ socket.on('set_op_name', function(name){
     gamestate = "game";
 });
 
+socket.on('points', function(info, updatep){
+    if (updatep) {
+        oppoints = oppoints + 1;
+        op.text = oppoints;
+    }
+    uncheckAll();
+    for(var i = 0; i< 3; ++i){
+        replace(info[i].id, info[i]);
+    }
+});
+
+socket.on('end_game', function(){
+    gamestate = "results";
+    if (oppoints > mypoints){
+        result.addChild(c1);
+    }
+    else if (mypoints > oppoints){
+        result.addChild(c2);
+    }
+    else {
+        result.addChild(c3);
+    }
+});
+
+socket.on('request_trash', function(){
+    opprequesting = !opprequesting;
+    re.visible = opprequesting;
+});
 
 // Card functions
 function onCardClick(){
@@ -210,6 +312,29 @@ function onCardClick(){
     if(mySelectedCards == 3){
         tripsCheckEm();
     }
+}
+
+function onTrashClick(){
+    if (this.inf.clicked){
+        socket.emit('click_on_trash');
+        unselectTrash();
+    }
+    else {
+        socket.emit('click_on_trash');
+        selectTrash();
+    }
+}
+
+function unselectTrash(){
+    t.scale.set(sT_);
+    t.inf.clicked = false;
+    t.tint = 0xFFFFFF;
+}
+
+function selectTrash(){
+    t.scale.set(bT_);
+    t.inf.clicked = true;
+    t.tint = 0xFF0000;
 }
 
 function unselectmy(i){
@@ -245,6 +370,16 @@ function uncheckAll(){
 
 function getPoints(){
     console.log("Points!");
+    info = [];
+    for (var i = 0; i < 12; ++i){
+        if (tableCards[i].inf.clicked){
+            info.push(i);
+        }
+    }
+    socket.emit('points', info);
+    mypoints = mypoints +1;
+    mp.text = mypoints;
+    uncheckAll();
 }
 
 function tripsCheckEm() {
@@ -277,5 +412,19 @@ function onCardOver(){
 function onCardOut(){
     if(!this.inf.clicked) {
         this.scale.set(sS_);
+    }
+}
+
+function onTrashOver(){
+    if(!this.inf.clicked){
+        this.scale.set(mT_);
+        re.scale.set(mT_);
+    }
+}
+
+function onTrashOut(){
+    if(!this.inf.clicked) {
+        this.scale.set(sT_);
+        re.scale.set(sT_);
     }
 }

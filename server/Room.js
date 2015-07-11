@@ -11,12 +11,11 @@ function Room( name ){
     this.p1_name = null;
     this.p2_name = null;
     this.anounced_names = 0;
-
+    this.p1_trashing = false;
+    this.p2_trashing = false;
     this.p1 = name;
     this.p2 = null;
     this.tablecards = [];
-
-
 }
 
 Room.prototype.generatedeck = function(){
@@ -29,6 +28,40 @@ Room.prototype.generatedeck = function(){
     return de;
 };
 
+Room.prototype.getRemaining = function(){
+    return  (this.deck.length);
+};
+
+Room.prototype.newcards = function(toreplace){
+        var nc = [];
+    for( var i = 2; i>=0; --i){ //com que anem del mes gran al mes petit, les 3 no cambien de posició al deque;
+        var del = toreplace[i];
+        //delete this.deck[i];
+        this.deck.splice(i, 1);
+    }
+    var cartesbuides;
+    if(this.deck.length >= 12){
+        cartesbuides = 0;
+    }
+    else {
+        cartesbuides = 12 - this.deck.length;
+    }
+    for (var i = 9; i<12-cartesbuides; ++i){
+        this.deck[i].table = true;
+        var c = this.allcards[this.deck[i].id];
+        this.tablecards[i] = c;
+        var ci = {isCard: true, id: toreplace[i-9], num: c.num, col: c.color, tex: c.texture, shape: c.shape};
+        nc.push(ci);
+    }
+    for (var i = 12-cartesbuides; i< 12; ++i){
+        var ci = {isCard: false, id: toreplace[i-9], num: null, col: null, tex: null, shape: null};
+        nc.push(ci);
+
+    }
+    console.log("newcards -> Remaining cards: " + this.deck.length);
+    return nc;
+};
+
 Room.prototype.begincards = function(){
     this.deck = this.generatedeck();
     var infos = [];
@@ -37,12 +70,30 @@ Room.prototype.begincards = function(){
         this.deck[i].table = true;
         var c = this.allcards[this.deck[i].id];
         this.tablecards[i] = c;
-        var ci = {num: c.num, col: c.color, tex: c.texture, shape: c.shape};
+        var ci = {isCard: true, id: i, num: c.num, col: c.color, tex: c.texture, shape: c.shape};
         infos.push(ci);
     }
+    console.log("begincards -> Remaining cards: " + this.deck.length);
     return infos;
 };
 
+Room.prototype.trashcards = function(){
+    //traiem les cartes de la taula
+    for (var i=0; i < 12; ++i){
+        this.deck[i].table = false;
+    }
+    this.deck.sort( function(){ return 0.5 - Math.random() });
+    var infos = [];
+    for (var i = 0; i < 12; ++i){
+        this.deck[i].table = true;
+        var c = this.allcards[this.deck[i].id];
+        this.tablecards[i] = c;
+        var ci = {isCard: true, num: c.num, col: c.color, tex: c.texture, shape: c.shape};
+        infos.push(ci);
+    }
+    console.log("trashcards -> Remaining cards: " + this.deck.length);
+    return infos;
+};
 
 Room.prototype.allcards = [];
     var  idc = 0;

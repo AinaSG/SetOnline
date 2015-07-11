@@ -48,6 +48,30 @@ io.on('connection', function (socket) {
         console.log('click_on_card', r);
         printrooms();
     });
+    socket.on('click_on_trash', function(){
+        console.log("TRASH!");
+        var r = socket.room_name;
+        if (socket.id == r){
+            rooms[r].p1_trashing = !rooms[r].p1_trashing;
+            socket.broadcast.to(r).emit('request_trash');
+        }
+        else{
+            rooms[r].p2_trashing = !rooms[r].p2_trashing;
+            socket.broadcast.to(r).emit('request_trash');
+        }
+        if( rooms[r].p1_trashing && rooms[r].p2_trashing){
+            console.log ("let's trash cards!");
+            if (rooms[r].getRemaining() > 12){
+            io.to(socket.room_name).emit('trash_cards',rooms[socket.room_name].trashcards());
+            rooms[r].p2_trashing = false;
+            rooms[r].p1_trashing = false;
+            }
+            else{
+                io.to(socket.room_name).emit('end_game');
+            }
+        }
+
+    });
     socket.on('disconnect', function () {
         var r = socket.room_name;
         var me = socket.player_num;
@@ -62,6 +86,12 @@ io.on('connection', function (socket) {
         }
         console.log('disconnect', r);
         printrooms();
+    });
+    socket.on('points', function(info){
+        var r = socket.room_name;
+        var newcards = rooms[socket.room_name].newcards(info);
+        socket.broadcast.to(r).emit('points',newcards, true);
+        socket.emit('points', newcards, false);
     });
     socket.on('anounceName', function(n) {
         console.log("Anounced name: ", n);

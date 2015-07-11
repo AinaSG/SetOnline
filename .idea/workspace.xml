@@ -28,19 +28,20 @@
         <entry file="file://$PROJECT_DIR$/server/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <caret line="59" column="57" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
+                <element signature="e#2295#2698#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Room.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Room.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/Room.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.1770387">
+              <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
               </folding>
@@ -48,13 +49,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51502144">
-              <caret line="178" column="41" selection-start-line="178" selection-start-column="41" selection-end-line="178" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="223" column="5" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
+                <element signature="n#!!block;n#fillcards#0" expanded="false" />
+                <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+                <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+                <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+                <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+                <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+                <element signature="n#!!block;n#onCardOut#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -89,8 +97,8 @@
         <option value="$PROJECT_DIR$/client/pixi.js" />
         <option value="$PROJECT_DIR$/server/Card.js" />
         <option value="$PROJECT_DIR$/server/index.js" />
-        <option value="$PROJECT_DIR$/server/Room.js" />
         <option value="$PROJECT_DIR$/client/main.js" />
+        <option value="$PROJECT_DIR$/server/Room.js" />
       </list>
     </option>
   </component>
@@ -131,6 +139,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -179,7 +188,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -282,11 +290,92 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/server/Room.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/Card.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+            <element signature="e#2295#2698#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/Room.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/Card.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -312,6 +401,13 @@
           <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -322,6 +418,7 @@
           <caret line="84" column="52" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="e#2295#2698#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -359,6 +456,13 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -369,6 +473,7 @@
           <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="e#2295#2698#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -406,6 +511,13 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -416,6 +528,7 @@
           <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="e#2295#2698#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -453,6 +566,13 @@
           <caret line="78" column="26" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -463,6 +583,7 @@
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="e#2295#2698#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -500,6 +621,13 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -510,6 +638,7 @@
           <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="e#2295#2698#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -654,6 +783,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="223" column="5" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+            <element signature="n#!!block;n#fillcards#0" expanded="false" />
+            <element signature="n#!!block;n#selectTrash#0" expanded="false" />
+            <element signature="n#!!block;n#unselectmy#0" expanded="false" />
+            <element signature="n#!!block;n#unselectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#selectopponent#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOver#0" expanded="false" />
+            <element signature="n#!!block;n#onCardOut#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/Card.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -662,30 +808,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/Room.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <caret line="59" column="57" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
+            <element signature="e#2295#2698#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/main.js">
+    <entry file="file://$PROJECT_DIR$/server/Room.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51502144">
-          <caret line="178" column="41" selection-start-line="178" selection-start-column="41" selection-end-line="178" selection-end-column="41" />
+        <state vertical-scroll-proportion="1.1770387">
+          <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
           </folding>
