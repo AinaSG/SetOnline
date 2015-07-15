@@ -5,7 +5,7 @@
 var serverURL = 'localhost:9000';
 //var serverURL = '192.168.1.41:9000'
 var socket = require('socket.io-client')(serverURL);
-
+var TWEEN = require('tween.js');
 
 //CONSTANTS
 var sW_ = 1100;
@@ -144,6 +144,7 @@ function animate() {
     else {
         renderer.render(win);
     }
+    TWEEN.update();
 }
 
 function fillcards() {
@@ -177,7 +178,7 @@ function fillcards() {
     }
 }
 
-function replace ( id, info){
+function actual_replace ( id, info){
     var card = tableCards[id];
     card.removeChildren();
     if(info.isCard) {
@@ -222,6 +223,21 @@ function replace ( id, info){
     else {
         tableCards[id].visible = false;
     }
+}
+
+function replace ( id, info){
+    var card = tableCards[id];
+    var tween = new TWEEN.Tween(card.scale).to({x:0,y:0},200);
+    tween.onComplete(function(){
+        actual_replace(id,info);
+    });
+    if(info.isCard) {
+        tween.chain(new TWEEN.Tween(card.scale).to({x:sS_,y:sS_},200).onComplete(function(){
+            card.interactive = true;
+        }));
+    }
+    card.interactive = false;
+    tween.start();
 }
 
 socket.on('click_on_card', function (id){
